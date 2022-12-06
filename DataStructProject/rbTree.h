@@ -117,19 +117,19 @@ public:
             return height(root) -1;
     }
 
-    int blackNodes(rbNode<V, K> node)
+    int blackNodes(rbNode<V, K>* node)
     {
         if (node == NULL)
             return 1;
 
-        int rightBlackNodes = blackNodes(node.right);
-        int leftBlackNodes = blackNodes(node.left);
+        int rightBlackNodes = blackNodes(node->right);
+        int leftBlackNodes = blackNodes(node->left);
         if (leftBlackNodes != rightBlackNodes)
         {
-            cout << "Fix tree! Depth property violation.";
+            cout << "Fix tree! Depth property violation.\n";
         }
         else {
-            if (node.black)
+            if (node->black)
             {
                 leftBlackNodes++;
             }
@@ -138,208 +138,217 @@ public:
     }
     
     //---------------INSERTION METHODS---------------------
-    void leftRotate(rbNode<V, K> node)
+    void leftRotate(rbNode<V, K>* node)
     {
-        rbNode<V, K> temp = node.right;
-        node.right = temp.left;
-        if (node.right != NULL) //update right child
+        rbNode<V, K>* temp = new rbNode<V, K>();
+            temp= node->right;
+        node->right = temp->left;
+        if (node->right != NULL) //update right child
         {
-            node.right->parent = node;
-            node.right->isleftchild = false;
+            node->right->parent = node;
+            node->right->isleftchild = false;
         }
-        if (node.parent == NULL) //we are the root node
+        if (node->parent == NULL) //we are the root node
         {
             root = temp;
-            temp.parent = NULL;
+            temp->parent = NULL;
         }
         else  //we're not the root
         {
-            temp.parent = node.parent;  //temp points to parent and parent points to temp
-            if (node.isleftchild)
+            temp->parent = node->parent;  //temp points to parent and parent points to temp
+            if (node->isleftchild)
             {
-                temp.isleftchild = true;
-                temp.parent->left = temp;
+                temp->isleftchild = true;
+                temp->parent->left = temp;
             }
             else
             {
-                temp.isleftchild = false;
-                temp.parent->right = temp;
+                temp->isleftchild = false;
+                temp->parent->right = temp;
             }
 
         }
-        temp.left = node;
-        node.isleftchild = true;
-        node.parent = temp;
+        temp->left = node;
+        node->isleftchild = true;
+        node->parent = temp;
     }
 
-    void rightRotate(rbNode<V, K> node)
+    void rightRotate(rbNode<V, K>* node)
     {
-        rbNode<V, K> temp = node.left;
-        node.left = temp.right;
-        if (node.left != NULL) //update left child
+        rbNode<V, K>* temp = new rbNode<V, K>();
+            temp = node->left;
+        node->left = temp->right;
+        if (node->left != NULL) //update left child
         {
-            node.left->parent = node;
-            node.left->isleftchild = true; //????
+            node->left->parent = node;
+            node->left->isleftchild = true; //????
         }
-        if (node.parent == NULL) //we are the root node
+        if (node->parent == NULL) //we are the root node
         {
             root = temp;
-            temp.parent = NULL;
+            temp->parent = NULL;
         }
         else  //we're not the root
         {
-            temp.parent = node.parent;  //temp points to parent and parent points to temp
-            if (!node.isleftchild) //???
+            temp->parent = node->parent;  //temp points to parent and parent points to temp
+            if (!node->isleftchild) //???
             {
-                temp.isleftchild = false;
-                temp.parent->right = temp;
+                temp->isleftchild = false;
+                temp->parent->right = temp;
             }
             else
             {
-                temp.isleftchild = true;
-                temp.parent->left = temp;
+                temp->isleftchild = true;
+                temp->parent->left = temp;
             }
 
         }
-        temp.right = node;
-        node.isleftchild = false;
-        node.parent = temp;
+        temp->right = node;
+        node->isleftchild = false;
+        node->parent = temp;
     }
 
-    void leftRightRotate(rbNode<V, K> node)
+    void leftRightRotate(rbNode<V, K>* node)
     {
         //rotate parent:  the parent is grand parent's left child
-        leftRotate(node.left);
+        leftRotate(node->left);
         rightRotate(node);
     }
 
-    void rightLeftRotate(rbNode<V, K> node)
+    void rightLeftRotate(rbNode<V, K>* node)
     {
         //rotate parent:  the parent is grand parent's right child
-        rightRotate(node.right);
+        rightRotate(node->right);
         leftRotate(node);
     }
 
-    void rotate(rbNode<V, K> node)
+    void rotate(rbNode<V, K>* node)
     {
-        if (node.isleftchild)
+        if (node->isleftchild)
         {
-            if (node.parent->isleftchild)
+            if (node->parent->isleftchild)
             {
-                rightRotate(node.parent->parent); //pass grandparent 
+                rightRotate(node->parent->parent); //pass grandparent 
                 //after rotation we and sibling become red and parent becomes black
-                node.black = false;
-                node.parent->black = true;
-                if (node.parent->right != NULL)
+                node->black = false;
+                node->parent->black = true;
+                if (node->parent->right != NULL)
                 {
-                    node.parent->right->black = false;
+                    node->parent->right->black = false;
                 }
                 return;
             }
             //parent is a right child
-            if (!node.parent->isleftchild)
+            if (!node->parent->isleftchild)
             {
-                rightLeftRotate(node.parent->parent);
-                node.black = true;
-                node.right->black = false;
-                node.left->black = false;
+                rightLeftRotate(node->parent->parent);
+                node->black = true;
+                node->right->black = false;
+                node->left->black = false;
                 return;
             }
         }
         else //its a right child
         {
-            if (!node.parent->isleftchild)
+            if (!node->parent->isleftchild)
             {
-                leftRotate(node.parent->parent); //pass grandparent 
+                leftRotate(node->parent->parent); //pass grandparent 
                 //after rotation we and sibling become red and parent becomes black
-                node.black = false;
-                node.parent->black = true;
-                if (node.parent->left != NULL)
+                node->black = false;
+                node->parent->black = true;
+                if (node->parent->left != NULL)
                 {
-                    node.parent->left->black = false;
+                    node->parent->left->black = false;
                 }
                 return;
             }
             //parent is a left child
-            if (node.parent->isleftchild)
+            if (node->parent->isleftchild)
             {
-                leftRightRotate(node.parent->parent);
-                node.black = true;
-                node.right->black = false;
-                node.left->black = false;
+                leftRightRotate(node->parent->parent);
+                node->black = true;
+                node->right->black = false;
+                node->left->black = false;
                 return;
             }
         }
     }
 
-    void correctTree(rbNode<V, K> node)
+    void correctTree(rbNode<V, K>* node)
     {
         //is aunt red or black?
-        if (node.parent->isleftchild)  //then aunt would be rightChild
+        if (node->parent->isleftchild)  //then aunt would be rightChild
         {
-            if (node.parent->parent->right == NULL || node.parent->parent->right->black) //if aunt is black
+            if (node->parent->parent->right == NULL || node->parent->parent->right->black) //if aunt is black
             {
                 rotate(node);
             }
-            if (node.parent->parent->right != NULL) //red aunt do colour flip
+            else if (node->parent->parent->right != NULL) //red aunt do colour flip
             {
-                node.parent->parent->right->black = true; //make aunt black
-                node.parent->parent->black = false; //make grandparent red
-                node.parent->black = true; //make parent black
+                node->parent->parent->right->black = true; //make aunt black
+                node->parent->parent->black = false; //make grandparent red
+                node->parent->black = true; //make parent black
                 return;
             }
         }
         else  //means aunt is leftChild of grandparent (when node.parent is rightChild) 
         {
-            if (node.parent->parent->left == NULL || node.parent->parent->left->black) //if aunt is black
-            {
-                rotate(node);
+            if (node->parent->parent != NULL) {
+                if (node->parent->parent->left == NULL || node->parent->parent->left->black) //if aunt is black
+                {
+                    rotate(node);
+                }
             }
-            if (node.parent->parent->left != NULL) //red aunt do colour flip
-            {
-                node.parent->parent->left->black = true; //make aunt black
-                node.parent->parent->black = false; //make grandparent red
-                node.parent->black = true; //make parent black
-                return;
+            if (node->parent->parent != NULL) {
+                if (node->parent->parent->left != NULL) //red aunt do colour flip
+                {
+                    node->parent->parent->left->black = true; //make aunt black
+                    node->parent->parent->black = false; //make grandparent red
+                    node->parent->black = true; //make parent black
+                    return;
+                }
             }
         }
 
     }
 
     
-    void checkColour(rbNode<V, K> node)  //recursive
+    void checkColour(rbNode<V, K>* node)  //recursive
     {
         if (node == root)
+        {
+            node->black = true;
             return;
-        if (!node.black && !node.parent->black)  //if node and parent both are red
+        }
+        else if (!node->black && !node->parent->black)  //if node and parent both are red
             correctTree(node);
-        checkColour(node.parent);
+            checkColour(node->parent);
     }
 
-    void insert(rbNode<V, K> currNode, rbNode<V, K> newNode)
+    void insert(rbNode<V, K>* currNode, rbNode<V, K>* newNode)
     {
-        if (newNode.getKey() > currNode.getKey())    //add to right
+        if (newNode->getKey() > currNode->getKey())    //add to right
         {
-            if (currNode.right == NULL)
+            if (currNode->right == NULL)
             {
-                currNode.right = newNode;
-                newNode.parent = currNode;
-                newNode.isleftchild = false;  //bcz we're right child
+                currNode->right = newNode;
+                newNode->parent = currNode;
+                newNode->isleftchild = false;  //bcz we're right child
                 //return;
             }
-            else insert(currNode.right, newNode);
+            else insert(currNode->right, newNode);
         }
-        else if (newNode.getKey() < currNode.getKey())
+        else if (newNode->getKey() < currNode->getKey())
         {
-            if (currNode.left == NULL)
+            if (currNode->left == NULL)
             {
-                currNode.left = newNode;
-                newNode.parent = currNode;
-                newNode.isleftchild = true;
+                currNode->left = newNode;
+                newNode->parent = currNode;
+                newNode->isleftchild = true;
                 //return;
             }
             else
-                insert(currNode.left, newNode);
+                insert(currNode->left, newNode);
         }
         checkColour(newNode);
     }
@@ -389,7 +398,7 @@ public:
         if (n != NULL)
         {
             InOrderTraversal(n->left);
-            cout << n->getKey() << " ";
+            cout << n->getKey() << " "<<n->black<<endl;
             InOrderTraversal(n->right);
         }
     }
