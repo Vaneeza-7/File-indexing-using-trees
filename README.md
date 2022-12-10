@@ -1,7 +1,7 @@
 # File-indexing-using-trees
 
-                                                                      Data Structures  
-                                                                   Project Documentation 
+                                              Data Structures  
+                                             Project Documentation 
  
  
  
