@@ -6,6 +6,10 @@
 
 using namespace std;
 string returnString(long selection, string str);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 class DataSet {
 public:
     long lineNo;
@@ -19,6 +23,11 @@ public:
         str = s;
     }
 };
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                   /*-------------------NODE PART-----------------------*/
 
 struct Node {
 
@@ -60,6 +69,10 @@ struct Node {
         }
         return;
     }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     void remove_leaf(long Fid) {
         for (long i = Fid + 1; i < N_Keys; ++i) {
             dataObjects[i - 1] = dataObjects[i];
@@ -68,6 +81,10 @@ struct Node {
 
         return;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     void remove_nonleaf(long Fid) {
         long numValue = dataObjects[Fid].id;
 
@@ -87,12 +104,14 @@ struct Node {
         }
         return;
     }
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     void insert_nonfull(DataSet numValue) {
         long index = N_Keys - 1;
 
         if (leaf == true) {
-            for (; index >= 0 and dataObjects[index].id > numValue.id;) {
+            for (;index >= 0 and dataObjects[index].id > numValue.id;) {
                 dataObjects[index + 1] = dataObjects[index];
                 index--;
             }
@@ -102,7 +121,7 @@ struct Node {
         }
         else
         {
-            for (; index >= 0 and dataObjects[index].id > numValue.id;) {
+            for (;index >= 0 and dataObjects[index].id > numValue.id;) {
                 index--;
             }
             if (ChildPtr[index + 1]->N_Keys == (2 * Degree) - 1) {
@@ -115,22 +134,30 @@ struct Node {
             ChildPtr[index + 1]->insert_nonfull(numValue);
         }
     }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     long predicate(long Fid) {
         Node* cur = ChildPtr[Fid];
-        for (; !cur->leaf;) {
+        for (;!cur->leaf;) {
             cur = cur->ChildPtr[cur->N_Keys];
         }
         return cur->dataObjects[cur->N_Keys - 1].id;
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     long getSucc(long Fid) {
 
         Node* cur = ChildPtr[Fid + 1];
-        for (; !cur->leaf;) {
+        for (;!cur->leaf;) {
             cur = cur->ChildPtr[0];
         }
         return cur->dataObjects[0].id;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     void getfrom_prev(long Fid) {
         Node* child = ChildPtr[Fid];
         Node* sibling = ChildPtr[Fid - 1];
@@ -156,6 +183,9 @@ struct Node {
 
         return;
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     void splitter(long i, Node* y) {
         Node* z = new Node(y->Degree, y->leaf);
         z->N_Keys = Degree - 1;
@@ -184,6 +214,9 @@ struct Node {
 
         N_Keys = N_Keys + 1;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     void fill(long Fid) {
         if (Fid != 0 and ChildPtr[Fid - 1]->N_Keys >= Degree) {
             getfrom_prev(Fid);
@@ -201,6 +234,9 @@ struct Node {
         }
         return;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     void merge(long Fid) {
         Node* child = ChildPtr[Fid];
         Node* sibling = ChildPtr[Fid + 1];
@@ -227,13 +263,19 @@ struct Node {
         delete(sibling);
         return;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     long findKey(long numValue) {
         long Fid = 0;
-        for (; Fid < N_Keys and dataObjects[Fid].id < numValue;) {
+        for (;Fid < N_Keys and dataObjects[Fid].id < numValue;) {
             ++Fid;
         }
         return Fid;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     void getfrom_next(long Fid) {
         Node* child = ChildPtr[Fid];
         Node* sibling = ChildPtr[Fid + 1];
@@ -259,6 +301,9 @@ struct Node {
 
         return;
     }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     void print() {
         long i;
         for (i = 0; i < N_Keys; i++) {
@@ -271,6 +316,9 @@ struct Node {
             ChildPtr[i]->print();
         }
     }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     void man(Node* t) {
         long i;
         for (i = 0; i < N_Keys; i++) {
@@ -283,6 +331,9 @@ struct Node {
             ChildPtr[i]->man(t);
         }
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     void alldel() {
         long i;
         for (i = 0; i < N_Keys; i++) {
@@ -295,6 +346,9 @@ struct Node {
             ChildPtr[i]->alldel();
         }
     }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     void traverseString(string a1, long b1) {
         long i;
         for (i = 0; i < N_Keys; i++) {
@@ -309,6 +363,8 @@ struct Node {
             ChildPtr[i]->traverseString(a1, b1);
         }
     }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     void traversepoint(long a) {
         long i;
@@ -339,10 +395,13 @@ struct Node {
         }
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     Node* search(long numValue)
     {
         long i = 0;
-        for (; i < N_Keys and numValue > dataObjects[i].id;) {
+        for (;i < N_Keys and numValue > dataObjects[i].id;) {
             i++;
         }
 
@@ -355,6 +414,12 @@ struct Node {
         return ChildPtr[i]->search(numValue);
     }
 };
+
+                             /*-------------------END OF NODE PART-----------------------*/
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                                    /*STRUCTURE OF B-TREE*/
 
 struct BTree {
     Node* root = NULL; // Pointer to root node 
@@ -428,7 +493,7 @@ struct BTree {
     }
     void frr(Node* u)
     {
-        u = NULL;
+        u=NULL;
     }
 
     Node* search(long numValue) {
@@ -481,8 +546,12 @@ void deler(Node* x)
 }
 void fre(Node* CocaCola)
 {
-    delete CocaCola;
+     delete CocaCola;
 }
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void creatingFile(string ID, string data, string fileName, long line) {
     string newFileName;
@@ -497,7 +566,9 @@ void creatingFile(string ID, string data, string fileName, long line) {
 
 }
 
-void readingOneFile(string& fileName, BTree& obj) {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void readingOneFile(string fileName, BTree& obj) {
 
     ifstream fileObject;
     fileObject.open(fileName);
@@ -507,7 +578,7 @@ void readingOneFile(string& fileName, BTree& obj) {
     string causeName113, causeName, state;
     long counter(1);
 
-    for (; !fileObject.eof();) {
+    for (;!fileObject.eof();) {
         getline(fileObject, str);
         if (counter > 1) {
 
@@ -517,7 +588,7 @@ void readingOneFile(string& fileName, BTree& obj) {
             };
             long itr = 0;
             long br = 0;
-            for (; str[i];) {
+            for (;str[i];) {
                 if (str[i] == '"') {
                     br++;
                     i++;
@@ -545,20 +616,23 @@ void readingOneFile(string& fileName, BTree& obj) {
         }
         counter++;
     }
-
+    fileObject.close();
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 void readingAllFiles(string alpha, BTree& obj) {
     _mkdir("Nodes");
     ifstream obj2;
     obj2.open(alpha);
-    if (obj2.fail()) {
-        cout << "File DeathRate_01.csv is not available in the current directory" << endl;
-        obj2.close();
-        exit(1);
-    }
-    obj2.close();
-
+    if(obj2.fail()){
+    	cout<<"File DeathRate_01.csv is not available in the current directory"<<endl;
+    	obj2.close();
+    	exit(1);
+	}
+	obj2.close();
+    
     for (long i(1); i <= 10; i++) {
         if (i < 10) {
             stringstream ss;
@@ -577,6 +651,8 @@ void readingAllFiles(string alpha, BTree& obj) {
     remove("\Nodes\\.txt");
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 string updateString(long selection, string str, string replacment) {
     long i = 0;
     string s[7] = {
@@ -584,7 +660,7 @@ string updateString(long selection, string str, string replacment) {
     };
     long itr = 0;
     long br = 0;
-    for (; str[i];) {
+    for (;str[i];) {
         if (str[i] == '"') {
             br++;
             i++;
@@ -628,6 +704,10 @@ string updateString(long selection, string str, string replacment) {
 
 }
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 string returnString(long selection, string str) {
     long i = 0;
     string s[7] = {
@@ -635,7 +715,7 @@ string returnString(long selection, string str) {
     };
     long itr = 0;
     long br = 0;
-    for (; str[i];) {
+    for (;str[i];) {
         if (str[i] == '"') {
             br++;
             i++;
@@ -679,6 +759,11 @@ string returnString(long selection, string str) {
 
 }
 
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 void Menu() {
     cout << "Please make sure that you have DeathRate_01.csv file in the directory you are running this program" << endl;
     //system("PAUSE");
@@ -693,7 +778,7 @@ void Menu() {
     BTree obj(degree);
     cout << endl;
     long choice(0);
-    for (; choice != 8;) {
+    for (;choice != 8;) {
         cout << "\n\n1. Read the File and Construct the B Tree" << endl <<
             "2. Do a point search" << endl <<
             "3. Specify an index range to search" << endl <<
@@ -710,13 +795,14 @@ void Menu() {
 
         case 1:
         {
-
             cout << "Reading All Files DeathRate_cx.csv and Entering Data into the BTree, Please Wait!" << endl;
-            readingOneFile("NCHS_-_Leading_Causes_of_Death__United_States_2", obj);
+            //readingOneFile("NCHS_-_Leading_Causes_of_Death__United_States_6.csv", obj);
+            readingOneFile("NCHS_-_Leading_Causes_of_Death__United_States_8.csv", obj);
             cout << "Reading From ALL Files Complete" << endl;
             cout << "Creating new files in folder Node" << endl;
             cout << "Creating new files in folder Node Complete" << endl;
             break;
+            
         }
 
         case 2: //Doing sigle point search
@@ -821,10 +907,10 @@ void Menu() {
             break;
         }
         case 7: {
-
+            
             obj.frr(obj.root);
             obj.root = NULL;
-            cout << endl << "Memory Freed Successfully." << endl;
+            cout<<endl<<"Memory Freed Successfully."<<endl;
             break;
         }
         case 6: {
