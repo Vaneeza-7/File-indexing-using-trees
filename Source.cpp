@@ -445,6 +445,13 @@ struct BTree {
         }
     }
 
+   /* void dfsTraverse() {
+        printNode();
+        for (int i = 0; i < szp; i++) {
+            if (ptr[i] != NULL) {
+                cout << "Goto " << i << " : " << endl; getchar();
+                ptr[i]->dfsTraverse();
+            }*/
 
     void traverseString(string a1, long a2) {
         if (root == NULL) {
@@ -570,6 +577,7 @@ void creatingFile(string ID, string data, string fileName, long line) {
 
 void readingOneFile(string fileName, BTree& obj) {
 
+    _mkdir("Nodes");
     ifstream fileObject;
     fileObject.open(fileName);
     string str;
@@ -796,8 +804,17 @@ void Menu() {
         case 1:
         {
             cout << "Reading All Files DeathRate_cx.csv and Entering Data into the BTree, Please Wait!" << endl;
-            //readingOneFile("NCHS_-_Leading_Causes_of_Death__United_States_6.csv", obj);
+            readingOneFile("NCHS_-_Leading_Causes_of_Death__United_States_1.csv", obj);
+            readingOneFile("NCHS_-_Leading_Causes_of_Death__United_States_2.csv", obj);
+            readingOneFile("NCHS_-_Leading_Causes_of_Death__United_States_3.csv", obj);
+            readingOneFile("NCHS_-_Leading_Causes_of_Death__United_States_4.csv", obj);
+            readingOneFile("NCHS_-_Leading_Causes_of_Death__United_States_5.csv", obj);
+            readingOneFile("NCHS_-_Leading_Causes_of_Death__United_States_6.csv", obj);
+            readingOneFile("NCHS_-_Leading_Causes_of_Death__United_States_7.csv", obj);
             readingOneFile("NCHS_-_Leading_Causes_of_Death__United_States_8.csv", obj);
+            readingOneFile("NCHS_-_Leading_Causes_of_Death__United_States_9.csv", obj);
+            readingOneFile("NCHS_-_Leading_Causes_of_Death__United_States_10.csv", obj);
+            //readingOneFile("NCHS_-_Leading_Causes_of_Death__United_States_6.csv", obj);
             cout << "Reading From ALL Files Complete" << endl;
             cout << "Creating new files in folder Node" << endl;
             cout << "Creating new files in folder Node Complete" << endl;
@@ -848,7 +865,7 @@ void Menu() {
 
             break;
         }
-        case 3: {
+        case 3: { //indexing range
             Node* obj2;
             if (obj.getRoot() == NULL) {
                 cout << "Please Read the files first" << endl << endl;
@@ -918,7 +935,7 @@ void Menu() {
             break;
         }
 
-        case 5: {
+        case 5: {  //edit
             if (obj.getRoot() == NULL) {
                 cout << "Please Read the files first" << endl << endl;
                 break;
