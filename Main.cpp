@@ -47,7 +47,7 @@ vector<vector<string>> fileReaderAVL(string names[], int index)
                                         arr[i] = word[i];
                                     }
                                     int id = atoi(arr);
-                                    idTree.root = idTree.insertNode(id,idTree.root,lineNo,names[p]);
+                                    idTree.root = idTree.insertNode(id, idTree.root, lineNo, names[p]);
                                     row.push_back(word);
                                 }
                             }
@@ -61,7 +61,7 @@ vector<vector<string>> fileReaderAVL(string names[], int index)
                     cout << "Could not open the file\n";
                 }
             }
-            //idTree.inOrdertraversal(idTree.root);
+            idTree.inOrdertraversal(idTree.root);
             /* for (int i = 0; i < content.size(); i++)
              {
                  for (int j = 0; j < content[i].size(); j++)
@@ -75,144 +75,7 @@ vector<vector<string>> fileReaderAVL(string names[], int index)
         break;
         case 2:
         {
-            //AVLTree<string> idTree;
-            //vector<vector<string>> content;
-            //vector<string> row;
-            //string line, word;
-            //int lineNo = 0;
-            //int wordNo = 0;
-            //for (int p = 0; p < 10; p++)
-            //{
-            //    fstream file(names[p], ios::in);
-            //    if (file.is_open())
-            //    {
-            //        lineNo = 0;
-            //        while (getline(file, line))
-            //        {
-            //            wordNo = 0;
-            //            if (lineNo > 0)
-            //            {
-            //                row.clear();
-
-            //                stringstream str(line);
-
-            //                while (getline(str, word, ','))
-            //                {
-            //                    wordNo++;
-            //                    if (wordNo == index)
-            //                    {
-            //                        /*int len = word.length();
-            //                        char* arr = new char[len];
-            //                        for (int i = 0; i < len; i++)
-            //                        {
-            //                            arr[i] = word[i];
-            //                        }
-            //                        int id = atoi(arr);*/
-            //                        idTree.root = idTree.insertNode(word, idTree.root, lineNo, names[p]);
-            //                        row.push_back(word);
-            //                    }
-            //                }
-            //                content.push_back(row);
-            //            }
-            //            lineNo++;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        cout << "Could not open the file\n";
-            //    }
-            //}
-            //idTree.inOrdertraversal(idTree.root);
-            ///* for (int i = 0; i < content.size(); i++)
-            // {
-            //     for (int j = 0; j < content[i].size(); j++)
-            //     {
-            //         cout << content[i][j] << " ";
-            //     }
-            //     cout << "\n";
-            // }*/
-            //return content;
-        }
-        break;
-        case 3:
-        {
-
-        }
-        break;
-        case 4:
-        {
-
-        }
-        break;
-        case 5:
-        {
-
-        }
-        break;
-        case 6:
-        {
-            //AVLTree<int> idTree;
-            //vector<vector<string>> content;
-            //vector<string> row;
-            //string line, word;
-            //int lineNo = 0;
-            //int wordNo = 0;
-            //for (int p = 0; p < 10; p++)
-            //{
-            //    fstream file(names[p], ios::in);
-            //    if (file.is_open())
-            //    {
-            //        lineNo = 0;
-            //        while (getline(file, line))
-            //        {
-            //            wordNo = 0;
-            //            if (lineNo > 0)
-            //            {
-            //                row.clear();
-
-            //                stringstream str(line);
-
-            //                while (getline(str, word, ','))
-            //                {
-            //                    wordNo++;
-            //                    if (wordNo == index)
-            //                    {
-            //                        int len = word.length();
-            //                        char* arr = new char[len];
-            //                        for (int i = 0; i < len; i++)
-            //                        {
-            //                            arr[i] = word[i];
-            //                        }
-            //                        int id = atoi(arr);
-            //                        idTree.root = idTree.insertNode(id, idTree.root, lineNo, names[p]);
-            //                        row.push_back(word);
-            //                    }
-            //                }
-            //                content.push_back(row);
-            //            }
-            //            lineNo++;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        cout << "Could not open the file\n";
-            //    }
-            //}
-            //idTree.inOrdertraversal(idTree.root);
-            ///* for (int i = 0; i < content.size(); i++)
-            // {
-            //     for (int j = 0; j < content[i].size(); j++)
-            //     {
-            //         cout << content[i][j] << " ";
-            //     }
-            //     cout << "\n";
-            // }*/
-            //return content;
-        }
-        break;
-        case 7:
-        {
-            AVLTree<int> idTree;
+            AVLTree<int> yearTree;
             vector<vector<string>> content;
             vector<string> row;
             string line, word;
@@ -244,8 +107,8 @@ vector<vector<string>> fileReaderAVL(string names[], int index)
                                     {
                                         arr[i] = word[i];
                                     }
-                                    int id = atoi(arr);
-                                    idTree.root = idTree.insertNode(id, idTree.root, lineNo, names[p]);
+                                    int year = atoi(arr);
+                                    yearTree.root = yearTree.insertNode(year, yearTree.root, lineNo, names[p]);
                                     row.push_back(word);
                                 }
                             }
@@ -259,7 +122,318 @@ vector<vector<string>> fileReaderAVL(string names[], int index)
                     cout << "Could not open the file\n";
                 }
             }
-            idTree.inOrdertraversal(idTree.root);
+            yearTree.inOrdertraversal(yearTree.root);
+            /* for (int i = 0; i < content.size(); i++)
+             {
+                 for (int j = 0; j < content[i].size(); j++)
+                 {
+                     cout << content[i][j] << " ";
+                 }
+                 cout << "\n";
+             }*/
+            return content;
+        }
+        break;
+        case 3:
+        {
+            AVLTree<string> cause113Tree;
+            vector<vector<string>> content;
+            vector<string> row;
+            string line, word;
+            int lineNo = 0;
+            int wordNo = 0;
+            for (int p = 0; p < 10; p++)
+            {
+                fstream file(names[p], ios::in);
+                if (file.is_open())
+                {
+                    lineNo = 0;
+                    while (getline(file, line))
+                    {
+                        wordNo = 0;
+                        if (lineNo > 0)
+                        {
+                            row.clear();
+
+                            stringstream str(line);
+
+                            while (getline(str, word, ','))
+                            {
+                                wordNo++;
+                                if (wordNo == index)
+                                {
+                                    int len = word.length();
+                                    char* arr = new char[len];
+                                    for (int i = 0; i < len; i++)
+                                    {
+                                        arr[i] = word[i];
+                                    }
+
+                                    //int year = atoi(arr);
+                                    cause113Tree.root = cause113Tree.insertNode(word, cause113Tree.root, lineNo, names[p]);
+                                    row.push_back(word);
+                                }
+                            }
+                            content.push_back(row);
+                        }
+                        lineNo++;
+                    }
+                    
+                }
+                else
+                {
+                    cout << "Could not open the file\n";
+                }
+            }
+            cause113Tree.inOrdertraversal(cause113Tree.root);
+            /* for (int i = 0; i < content.size(); i++)
+             {
+                 for (int j = 0; j < content[i].size(); j++)
+                 {
+                     cout << content[i][j] << " ";
+                 }
+                 cout << "\n";
+             }*/
+            return content;
+        }
+        break;
+        case 4:
+        {
+            AVLTree<string> causeTree;
+            vector<vector<string>> content;
+            vector<string> row;
+            string line, word;
+            int lineNo = 0;
+            int wordNo = 0;
+            for (int p = 0; p < 10; p++)
+            {
+                fstream file(names[p], ios::in);
+                if (file.is_open())
+                {
+                    lineNo = 0;
+                    while (getline(file, line))
+                    {
+                        wordNo = 0;
+                        if (lineNo > 0)
+                        {
+                            row.clear();
+
+                            stringstream str(line);
+
+                            while (getline(str, word, ','))
+                            {
+                                wordNo++;
+                                if (wordNo == index)
+                                {
+                                    int len = word.length();
+                                    char* arr = new char[len];
+                                    for (int i = 0; i < len; i++)
+                                    {
+                                        arr[i] = word[i];
+                                    }
+
+                                    //int year = atoi(arr);
+                                    causeTree.root = causeTree.insertNode(word, causeTree.root, lineNo, names[p]);
+                                    row.push_back(word);
+                                }
+                            }
+                            content.push_back(row);
+                        }
+                        lineNo++;
+                    }
+
+                }
+                else
+                {
+                    cout << "Could not open the file\n";
+                }
+            }
+            causeTree.inOrdertraversal(causeTree.root);
+            /* for (int i = 0; i < content.size(); i++)
+             {
+                 for (int j = 0; j < content[i].size(); j++)
+                 {
+                     cout << content[i][j] << " ";
+                 }
+                 cout << "\n";
+             }*/
+            return content;
+        }
+        break;
+        case 5:
+        {
+            AVLTree<string> stateTree;
+            vector<vector<string>> content;
+            vector<string> row;
+            string line, word;
+            int lineNo = 0;
+            int wordNo = 0;
+            for (int p = 0; p < 10; p++)
+            {
+                fstream file(names[p], ios::in);
+                if (file.is_open())
+                {
+                    lineNo = 0;
+                    while (getline(file, line))
+                    {
+                        wordNo = 0;
+                        if (lineNo > 0)
+                        {
+                            row.clear();
+
+                            stringstream str(line);
+
+                            while (getline(str, word, ','))
+                            {
+                                wordNo++;
+                                if (wordNo == index)
+                                {
+                                    int len = word.length();
+                                    char* arr = new char[len];
+                                    for (int i = 0; i < len; i++)
+                                    {
+                                        arr[i] = word[i];
+                                    }
+
+                                    //int year = atoi(arr);
+                                    stateTree.root = stateTree.insertNode(word, stateTree.root, lineNo, names[p]);
+                                    row.push_back(word);
+                                }
+                            }
+                            content.push_back(row);
+                        }
+                        lineNo++;
+                    }
+
+                }
+                else
+                {
+                    cout << "Could not open the file\n";
+                }
+            }
+            stateTree.inOrdertraversal(stateTree.root);
+            /* for (int i = 0; i < content.size(); i++)
+             {
+                 for (int j = 0; j < content[i].size(); j++)
+                 {
+                     cout << content[i][j] << " ";
+                 }
+                 cout << "\n";
+             }*/
+            return content;
+        }
+        break;
+        case 6:
+        {
+            AVLTree<int> deathTree;
+            vector<vector<string>> content;
+            vector<string> row;
+            string line, word;
+            int lineNo = 0;
+            int wordNo = 0;
+            for (int p = 0; p < 10; p++)
+            {
+                fstream file(names[p], ios::in);
+                if (file.is_open())
+                {
+                    lineNo = 0;
+                    while (getline(file, line))
+                    {
+                        wordNo = 0;
+                        if (lineNo > 0)
+                        {
+                            row.clear();
+
+                            stringstream str(line);
+
+                            while (getline(str, word, ','))
+                            {
+                                wordNo++;
+                                if (wordNo == index)
+                                {
+                                    int len = word.length();
+                                    char* arr = new char[len];
+                                    for (int i = 0; i < len; i++)
+                                    {
+                                        arr[i] = word[i];
+                                    }
+                                    int death = atoi(arr);
+                                    deathTree.root = deathTree.insertNode(death, deathTree.root, lineNo, names[p]);
+                                    row.push_back(word);
+                                }
+                            }
+                            content.push_back(row);
+                        }
+                        lineNo++;
+                    }
+                }
+                else
+                {
+                    cout << "Could not open the file\n";
+                }
+            }
+            deathTree.inOrdertraversal(deathTree.root);
+            /* for (int i = 0; i < content.size(); i++)
+             {
+                 for (int j = 0; j < content[i].size(); j++)
+                 {
+                     cout << content[i][j] << " ";
+                 }
+                 cout << "\n";
+             }*/
+            return content;
+        }
+        break;
+        case 7:
+        {
+            AVLTree<int> ageTree;
+            vector<vector<string>> content;
+            vector<string> row;
+            string line, word;
+            int lineNo = 0;
+            int wordNo = 0;
+            for (int p = 0; p < 10; p++)
+            {
+                fstream file(names[p], ios::in);
+                if (file.is_open())
+                {
+                    lineNo = 0;
+                    while (getline(file, line))
+                    {
+                        wordNo = 0;
+                        if (lineNo > 0)
+                        {
+                            row.clear();
+
+                            stringstream str(line);
+
+                            while (getline(str, word, ','))
+                            {
+                                wordNo++;
+                                if (wordNo == index)
+                                {
+                                    int len = word.length();
+                                    char* arr = new char[len];
+                                    for (int i = 0; i < len; i++)
+                                    {
+                                        arr[i] = word[i];
+                                    }
+                                    int age = atoi(arr);
+                                    ageTree.root = ageTree.insertNode(age, ageTree.root, lineNo, names[p]);
+                                    row.push_back(word);
+                                }
+                            }
+                            content.push_back(row);
+                        }
+                        lineNo++;
+                    }
+                }
+                else
+                {
+                    cout << "Could not open the file\n";
+                }
+            }
+            ageTree.inOrdertraversal(ageTree.root);
             /* for (int i = 0; i < content.size(); i++)
              {
                  for (int j = 0; j < content[i].size(); j++)
@@ -273,7 +447,7 @@ vector<vector<string>> fileReaderAVL(string names[], int index)
         break;
         default:
         {
-
+            cout << "Wrong number!!" << endl;
         }
         break;
     }

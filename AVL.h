@@ -20,7 +20,7 @@ public:
 	AVLNode<T>* right;											//Pointer for right child
 	AVLNode()													//Default constructor for node class
 	{
-		key = 0;
+		key;
 		height = 0;
 		lineNum = 0;
 		fileName = "";
@@ -36,7 +36,7 @@ public:
 		height = 0;
 		left = NULL;
 		right = NULL;
-		list.insert(k);
+		//list.insert(k,l,f);
 	}
 	int calculateHeight(AVLNode<T>* n)							//Function to calculate height of the tree
 	{
@@ -102,10 +102,10 @@ public:
 					else
 						r = rotateLR(r);
 			}
-			else
+			else if (k == r->key)
 			{													//If the data is a duplicate
-				cout << "Here will be the linked list of duplicates" << endl;
-				r->list.insert(k);
+				//cout << "Here will be the linked list of duplicates" << endl;
+				r->list.insert(k,l,f);
 			}
 
 		}
@@ -115,9 +115,12 @@ public:
 	AVLNode<T>* rotateRR(AVLNode<T>* v1)
 	{
 		AVLNode<T>* v2 = new AVLNode<T>;
-		v2 = v1->left;
-		v1->left = v2->right;
-		v2->right = v1;
+		if (v1->left != NULL)
+		{
+			v2 = v1->left;
+			v1->left = v2->right;
+			v2->right = v1;
+		}
 		v1->height = v1->max(v1->calculateHeight(v1->left), v1->calculateHeight(v1->right)) + 1;
 		v2->height = v2->max(v2->calculateHeight(v2->left), v1->height) + 1;
 		return v2;
@@ -125,9 +128,12 @@ public:
 	AVLNode<T>* rotateLL(AVLNode<T>* v1)
 	{
 		AVLNode<T>* v2 = new AVLNode<T>;
-		v2 = v1->right;
-		v1->right = v2->left;
-		v2->left = v1;
+		if (v1->right != NULL)
+		{
+			v2 = v1->right;
+			v1->right = v2->left;
+			v2->left = v1;
+		}
 		v1->height = v1->max(v1->calculateHeight(v1->left), v1->calculateHeight(v1->right)) + 1;
 		v2->height = v2->max(v2->calculateHeight(v2->left), v1->height) + 1;
 		return v2;
@@ -150,6 +156,11 @@ public:
 		{
 			inOrdertraversal(r->left);
 			cout << r->key << " " << r->lineNum << " " << r->fileName << endl;
+			if (r->list.head != NULL)
+			{
+				cout << "--------------------------------------Duplicates-----------------------------------------" << endl;
+				r->list.printLL();
+			}
 			inOrdertraversal(r->right);
 		}
 	}
