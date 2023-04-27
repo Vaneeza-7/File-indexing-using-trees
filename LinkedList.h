@@ -20,14 +20,14 @@ public:
 		data;
 		next = NULL;
 	}
-	Node(N d,int l,string f)									//Parameterized constructor
+	Node(N d, int l, string f)									//Parameterized constructor
 	{
 		line = l;
 		file = f;
 		data = d;
 		next = NULL;
 	}
-	Node(N d, Node<N>* n,int l,string f)						//Parameterized constructor
+	Node(N d, Node<N>* n, int l, string f)						//Parameterized constructor
 	{
 		line = l;
 		file = f;
@@ -56,11 +56,11 @@ public:
 	{
 		head = NULL;
 	}
-	void insert(N d,int l,string f)								//Function to insert a new node in the list
+	void insert(N d, int l, string f)								//Function to insert a new node in the list
 	{
 		if (head == NULL)										//If the list is empty
 		{
-			Node<N>* n = new Node<N>(d,l,f);
+			Node<N>* n = new Node<N>(d, l, f);
 			head = n;
 			head->next = NULL;
 		}
@@ -72,7 +72,7 @@ public:
 			{
 				temp = temp->next;
 			}
-			temp->next = new Node<N>(d,l,f);
+			temp->next = new Node<N>(d, l, f);
 			(temp->next)->next = NULL;
 		}
 	}
@@ -93,7 +93,7 @@ public:
 		}
 		else
 		{														//If the first node does not have the data being searched
-			while (temp->data != d || temp->next!=NULL)
+			while (temp->data != d || temp->next != NULL)
 			{
 				temp = temp->next;
 			}
@@ -118,11 +118,12 @@ public:
 			temp = temp->next;
 		}
 	}
-	void updateList(N d,int l,string f)							//Function to update some value in the list
+
+	void updateList(N d, int l, string f)							//Function to update some value in the list
 	{
 
 	}
-	void removeNode(N d,int l,string f)							//Function to remove a node from the list
+	void removeNode(N d, int l, string f)							//Function to remove a node from the list
 	{
 
 	}
